@@ -1,12 +1,10 @@
 from tkinter import *
 from tkinter import messagebox
 from PIL import ImageTk, Image
-import tkinter.font as font
 import runpy
 import sqlite3
-import hashlib  # ✅ For SHA-256 password hashing
+import hashlib  
 
-# Create the main project window
 project = Tk()
 project.configure(bg="white")
 project.attributes("-fullscreen", True)
@@ -61,7 +59,7 @@ def leave(i):
 btn_back.bind('<Enter>', enter)
 btn_back.bind('<Leave>', leave)
 
-# --- Sign In Frame ---
+#Sign In Frame
 frame_width = 450
 frame_height = 455
 frame2 = Frame(project, width=frame_width, height=frame_height, bg="white", highlightthickness=2, highlightbackground="#f06d95")
@@ -70,7 +68,6 @@ frame2.place(x=(screen_width - frame_width) // 2, y=(screen_height - frame_heigh
 heading = Label(frame2, text='Sign In', fg="#f06d95", bg="white", font=("Arial", 30, "bold"))
 heading.place(x=160, y=25)
 
-# Placeholder handling for email
 def on_enter(w):
     if user.get() == "Email":
         user.delete(0, "end")
@@ -87,7 +84,6 @@ user.bind('<FocusOut>', on_leave)
 
 Frame(frame2, width=340, height=2, bg="#f06d95").place(x=50, y=152)
 
-# Password Entry
 def on_enter_password(w):
     if code.get() == "Password":
         code.delete(0, "end")
@@ -106,7 +102,6 @@ code.bind('<FocusOut>', on_leave_password)
 
 Frame(frame2, width=340, height=2, bg="#f06d95").place(x=50, y=227)
 
-# ✅ Hashing function (same as signup)
 def hash_password(password):
     """Hashes the password using SHA-256."""
     return hashlib.sha256(password.encode()).hexdigest()
