@@ -3,6 +3,7 @@ from tkinter import messagebox
 from PIL import ImageTk, Image
 import sqlite3
 import hashlib
+import runpy
 
 project = Tk()
 project.configure(bg="white")
@@ -122,7 +123,7 @@ def signup():
 
 def go_to_login():
     project.destroy()
-    import login 
+    runpy.run_path("login.py")
 
 signup_btn = Button(frame, width=39, pady=7, text="Sign Up", bg="#f06d95", fg="white", border=0, cursor="hand2",
                     font=("Arial", 13), command=signup)
