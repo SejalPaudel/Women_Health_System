@@ -137,6 +137,77 @@ def signin():
 # Sign In Button
 Button(frame2, width=30, pady=10, text="Sign In", bg="#f06d95", fg="white", border=0,
        command=signin, font=("Arial", 14, "bold")).place(x=35, y=300)
+       
+#Forgot Password
+def forgot_password():
+    def validate_email_exists(email):
+        """Validates if the email exists in the database."""
+        conn = sqlite3.connect("signup.db")
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM patient WHERE LOWER(email)=?", (email.lower(),))
+        user_data = cursor.fetchone()
+        conn.close()
+        return user_data
+
+    def reset_password():
+        email = email_entry.get().strip()
+        if not email:
+            messagebox.showwarning("Input Error", "Please enter an email address.")
+            return
+        
+        user_data = validate_email_exists(email)
+        
+        if user_data:
+            reset_window = Toplevel(project)
+            reset_window.title("Reset Password")
+            reset_window.geometry("400x250")
+
+            new_password_label = Label(reset_window, text="Enter New Password:", font=("Arial", 14))
+            new_password_label.pack(pady=20)
+            
+            new_password_entry = Entry(reset_window, show="*", width=25, font=("Arial", 14))
+            new_password_entry.pack(pady=10)
+
+            def save_new_password():
+                new_password = new_password_entry.get().strip()
+                if not new_password:
+                    messagebox.showwarning("Input Error", "Please enter a new password.")
+                    return
+                hashed_password = hash_password(new_password)
+                
+                # Update the password in the database
+                conn = sqlite3.connect("signup.db")
+                cursor = conn.cursor()
+                cursor.execute("UPDATE patient SET password=? WHERE LOWER(email)=?", (hashed_password, email.lower()))
+                conn.commit()
+                conn.close()
+                
+                messagebox.showinfo("Password Reset", "Your password has been reset successfully.")
+                reset_window.destroy()
+
+            reset_button = Button(reset_window, text="Reset Password", command=save_new_password, bg="#f06d95", fg="white")
+            reset_button.pack(pady=10)
+
+        else:
+            messagebox.showerror("Email Not Found", "No account found with this email.")
+
+    # Forgot Password Window
+    forgot_window = Toplevel(project)
+    forgot_window.title("Forgot Password")
+    forgot_window.geometry("400x250")
+    
+    forgot_label = Label(forgot_window, text="Enter your email to reset password:", font=("Arial", 14))
+    forgot_label.pack(pady=20)
+
+    email_entry = Entry(forgot_window, width=25, font=("Arial", 14))
+    email_entry.pack(pady=10)
+
+    reset_button = Button(forgot_window, text="Submit", command=reset_password, bg="#f06d95", fg="white")
+    reset_button.pack(pady=10)
+
+# Forgot Password Button
+Button(frame2, width=30, pady=5, text="Forgot Password?", bg="#f06d95", fg="white", border=0,
+       command=forgot_password, font=("Arial", 12, "bold")).place(x=35, y=370)
 
 
 def initialize_database():
