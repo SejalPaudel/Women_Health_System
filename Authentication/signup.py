@@ -118,11 +118,11 @@ def signup():
             go_to_login()
         except sqlite3.IntegrityError as e:
             messagebox.showinfo("Error", "Patient ID or Email already exists.")
-            print(e)  # Debugging error
+            print(e)
 
 def go_to_login():
     project.destroy()
-    import l  # Improved way to transition to the login screen
+    import login 
 
 signup_btn = Button(frame, width=39, pady=7, text="Sign Up", bg="#f06d95", fg="white", border=0, cursor="hand2",
                     font=("Arial", 13), command=signup)
@@ -132,7 +132,7 @@ login_btn = Button(frame, width=39, pady=7, text="Sign In", bg="#f06d95", fg="wh
                    font=("Arial", 13), command=go_to_login)
 login_btn.place(x=40, y=530)
 
-# Main loop and database closing
+
 project.mainloop()
 
 conn.close()
