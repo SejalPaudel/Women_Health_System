@@ -70,6 +70,24 @@ email = create_label_entry(frame, 42, 280, 25, "Enter Your Email")
 password = create_label_entry(frame, 42, 345, 25, "Create Password", show="●")
 confirm_password = create_label_entry(frame, 42, 410, 25, "Confirm Password", show="●")
 
+# Function to show password
+def password_visibile():
+    if show_password_var.get():
+        password.config(show='')
+        confirm_password.config(show='')
+    else:
+        password.config(show='●')
+        confirm_password.config(show='●')
+
+show_password_var = IntVar()
+
+show_password_c = Checkbutton(
+    frame, text="Show Password", variable=show_password_var,
+    bg="white", font=("Microsoft Yahei UI Light", 12),
+    command=password_visibile
+)
+show_password_c.place(x=300, y=440)
+
 # Database setup
 conn = sqlite3.connect('signup.db')
 c = conn.cursor()
