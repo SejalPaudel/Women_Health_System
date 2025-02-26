@@ -2,6 +2,10 @@ from tkinter import *
 from tkinter import messagebox
 from PIL import ImageTk, Image
 import runpy
+from settings import open_settings
+from history import open_medical_history
+from period import open_period_tracker
+from userdetails import open_user_details
 from mentalhealth import open_mental_health
 
 project = Tk()
@@ -79,9 +83,18 @@ frame2.place(x=(screen_width - frame_width) // 2, y=(screen_height - frame_heigh
 heading = Label(frame2, text='Dashboard', fg="#f06d95", bg="white", font=("Arial", 30))
 heading.place(x=120, y=25)
 
-
+Button(frame2, text="Period Tracker", width=20, pady=7, bg="#57a1f8", fg="white", border=0, command=open_period_tracker,
+        font=("Arial", 14, "bold")).place(x=50, y=100)
+Button(frame2, text="Medical History", width=20, pady=7, bg="#57a1f8", fg="white", border=0, command=open_medical_history,
+        font=("Arial", 14, "bold")).place(x=50, y=150)
+Button(frame2, text="Settings", width=20, pady=7, bg="#57a1f8", fg="white", border=0, command=open_settings, 
+       font=("Arial", 14, "bold")).place(x=50, y=200)
 Button(frame2,text="Mental Healthcare", width=20, pady=7,bg="#57a1f8", fg="white", border=0, command=open_mental_health ,
        font=("Arial", 14, "bold")).place(x=50, y=250)
+Button(frame2, text="User Details", width=20, pady=7, bg="#57a1f8", fg="white", border=0, command=open_user_details ,
+       font=("Arial", 14, "bold")).place(x=50, y=300)
+Button(frame2, text="Logout", width=20, pady=7, bg="#ff6666", fg="white", border=0, command=logout, 
+       font=("Arial", 14, "bold")).place(x=50, y=350)       
 project.protocol("WM_DELETE_WINDOW", close_window) 
 
 project.mainloop()
