@@ -94,7 +94,8 @@ Button(frame2,text="Mental Healthcare", width=20, pady=7,bg="#57a1f8", fg="white
 Button(frame2, text="User Details", width=20, pady=7, bg="#57a1f8", fg="white", border=0, command=open_user_details ,
        font=("Arial", 14, "bold")).place(x=50, y=300)
 Button(frame2, text="Logout", width=20, pady=7, bg="#ff6666", fg="white", border=0, command=logout, 
-       font=("Arial", 14, "bold")).place(x=50, y=350)       
+       font=("Arial", 14, "bold")).place(x=50, y=350)
+
 project.protocol("WM_DELETE_WINDOW", close_window) 
 
 project.mainloop()
