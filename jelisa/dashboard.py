@@ -2,7 +2,7 @@ from tkinter import *
 from tkinter import messagebox
 from PIL import ImageTk, Image
 import runpy
-
+from mentalhealth import open_mental_health
 
 project = Tk()
 project.configure(bg="white")
@@ -80,7 +80,8 @@ heading = Label(frame2, text='Dashboard', fg="#f06d95", bg="white", font=("Arial
 heading.place(x=120, y=25)
 
 
-
+Button(frame2,text="Mental Healthcare", width=20, pady=7,bg="#57a1f8", fg="white", border=0, command=open_mental_health ,
+       font=("Arial", 14, "bold")).place(x=50, y=250)
 project.protocol("WM_DELETE_WINDOW", close_window) 
 
 project.mainloop()
