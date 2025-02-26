@@ -106,6 +106,23 @@ def hash_password(password):
     """Hashes the password using SHA-256."""
     return hashlib.sha256(password.encode()).hexdigest()
 
+# Function to show password
+def password_visibile():
+    if show_password_var.get():
+        code.config(show='')  # Show password
+    else:
+        code.config(show='●')  # Hide password
+
+show_password_var = IntVar()
+
+show_password_cb = Checkbutton(
+    frame2, text="Show Password", variable=show_password_var,
+    bg="white", font=("Microsoft Yahei UI Light", 12),
+    command=password_visibile
+)
+show_password_cb.place(x=50, y=240)
+
+
 def signin():
     email_input = user.get().strip()
     password_input = code.get().strip()
