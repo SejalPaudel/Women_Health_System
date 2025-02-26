@@ -48,32 +48,27 @@ frame.place(x=(screen_width - 500) // 2, y=(screen_height - 600) // 2 + 80)
 heading = Label(frame, text='Sign Up', fg="#f06d95", bg="white", font=("Arial", 30))
 heading.place(x=180, y=10)
 
-def create_entry(frame, x, y, width, placeholder, show=None):
-    def on_focus_in(event):
-        if entry.get() == placeholder:
-            entry.delete(0, END)
-            entry.config(show=show if show else "")
-
-    def on_focus_out(event):
-        if entry.get() == "":
-            entry.insert(0, placeholder)
-            entry.config(show="")
-
-    entry = Entry(frame, width=width, fg="black", border=0, bg="white", font=("Microsoft Yahei UI Light", 16))
-    entry.place(x=x, y=y)
-    entry.insert(0, placeholder)
-    entry.bind('<FocusIn>', on_focus_in)
-    entry.bind('<FocusOut>', on_focus_out)
-    Frame(frame, width=360, height=2, bg="#f06d95").place(x=x, y=y + 27)
+# Form fields
+def create_label_entry(frame, x, y, width, placeholder, show=None):
+    # Label for placeholder
+    label = Label(frame, text=placeholder, fg="#b0b0b0", bg="white", font=("Microsoft Yahei UI Light", 16))
+    label.place(x=x, y=y)
+    
+    # Entry field
+    entry = Entry(frame, width=width, fg="black", border=0, bg="white", font=("Microsoft Yahei UI Light", 16), show=show)
+    entry.place(x=x, y=y + 25)
+   
+    Frame(frame, width=360, height=2, bg="#f06d95").place(x=x, y=y + 52)
+    
     return entry
 
-# Form fields
-name = create_entry(frame, 42, 85, 25, "Name")
-patient_id = create_entry(frame, 42, 150, 25, "Patient ID")
-phone_number = create_entry(frame, 42, 215, 25, "Phone Number")
-email = create_entry(frame, 42, 280, 25, "Enter Your Email")
-password = create_entry(frame, 42, 345, 25, "Create Password", show="●")
-confirm_password = create_entry(frame, 42, 410, 25, "Confirm Password", show="●")
+# Create fields with labels as placeholders
+name = create_label_entry(frame, 42, 85, 25, "Name")
+patient_id = create_label_entry(frame, 42, 150, 25, "Patient ID")
+phone_number = create_label_entry(frame, 42, 215, 25, "Phone Number")
+email = create_label_entry(frame, 42, 280, 25, "Enter Your Email")
+password = create_label_entry(frame, 42, 345, 25, "Create Password", show="●")
+confirm_password = create_label_entry(frame, 42, 410, 25, "Confirm Password", show="●")
 
 # Database setup
 conn = sqlite3.connect('signup.db')
