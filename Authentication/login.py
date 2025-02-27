@@ -45,7 +45,7 @@ btn_close.place(x=screen_width - 50, y=10)
 # Back Button
 def back():
     project.destroy()
-    runpy.run_path("s.py")
+    runpy.run_path("signup.py")
 
 btn_back = Button(project, text="<<", width=4, bg="#f06d95", border=0, font=("Arial", 14, "bold"), command=back)
 btn_back.place(x=0, y=170)
